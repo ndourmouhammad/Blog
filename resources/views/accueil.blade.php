@@ -111,11 +111,11 @@
                             <a href="{{ route('articles.details', ['id' => $article->id]) }}" title="Voir détails">
                                 <i class="fas fa-info-circle"></i>
                             </a>
-                            <a href="" title="Modifier"
+                            <a href="{{ route('articles.modifie', ['id' => $article->id]) }}" title="Modifier"
                                 class="edit">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="" title="Supprimer"
+                            <a href="{{ route('articles.supprime', ['id' => $article->id]) }}" title="Supprimer"
                                 class="delete"
                                 onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
                                 <i class="fas fa-trash-alt"></i>
