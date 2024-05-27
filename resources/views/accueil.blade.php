@@ -88,7 +88,7 @@
         <h1 class="mb-4">La liste de mes articles</h1>
         <!-- Bouton pour rediriger vers le formulaire -->
         <div class="d-flex justify-content-center mb-4">
-            <a href="" class="btn btn-primary">
+            <a href="{{ route('article.ajoute') }}" class="btn btn-primary">
                 <i class="fas fa-plus-circle me-2"></i> Nouvel article
             </a>
         </div>
@@ -101,12 +101,9 @@
             @foreach ($mes_articles as $article)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
-                        <img class="card-img-top" src="{{ $article->url_image }}"
+                        <img class="card-img-top" src="{{ Storage::url('public/blog/' . $article->url_image) }}"
                             alt="Image de l'article">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="category-label">{{ $article->catégorie }}</span>
-                            </div>
                             <h5 class="card-title">{{ $article->nom }}</h5>
                             <p class="card-text">{{ Str::limit($article->description, 200) }}</p>
                         </div>

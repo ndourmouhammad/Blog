@@ -46,7 +46,7 @@
 
 <body>
     <div class="container mt-5 content-wrapper">
-        <a href="{{ route('index') }}" class="btn btn-secondary mb-4">
+        <a href="{{ route('accueil') }}" class="btn btn-secondary mb-4">
             <i class="fas fa-arrow-left"></i> Retourner à la page d'accueil
         </a>
         @if (session('success'))
@@ -54,10 +54,9 @@
                 {{ session('success') }}
             </div>
         @endif
-        <img class="card-img-top mt-3 mb-3" src="{{ $article->url_image }}"
+        <img class="card-img-top mt-3 mb-3" src="{{ Storage::url('public/blog/' . $article->url_image) }}"
             alt="Image de l'article">
         <h1>{{ $article->nom }}</h1>
-        <h6 class="card-title">Catégorie : <span class="category-label">{{ $article->catégorie }}</span></h6>
         <p class="mt-3">{{ $article->description }}</p>
         <p class="text-muted">Publié le : {{ $article->created_at }}</p>
     </div>
