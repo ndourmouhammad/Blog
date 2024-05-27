@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->text('description');
             $table->string('url_image');
+            $table->boolean('a_la_une');
             $table->timestamps();
         });
     }

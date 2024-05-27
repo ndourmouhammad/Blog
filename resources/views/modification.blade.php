@@ -45,6 +45,14 @@
             background: darkred;
             border: darkred;
         }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .img-thumbnail {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -54,30 +62,43 @@
         <form action="/modifier/traitement" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $article->id }}">
-            <div class="mb-3">
+            
+            <div class="form-group">
                 <label for="nom" class="form-label">Nom de l'article</label>
-                <input type="text" class="form-control" id="nom" name="nom" value="{{ $article->nom }}"
-                    required>
+                <input type="text" class="form-control" id="nom" name="nom" value="{{ $article->nom }}" required>
                 <div class="invalid-feedback">Veuillez entrer le nom de l'article.</div>
             </div>
-            <div class="mb-3">
+
+            <div class="form-group">
                 <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image" name="image"
-                    value="{{ $article->url_image }}">
+                <input type="file" class="form-control" id="image" name="image" value="{{ $article->url_image }}">
                 <div class="invalid-feedback">Veuillez sélectionner une image.</div>
                 <!-- Affichage de l'image actuelle -->
                 @if ($article->url_image)
                     <div class="mt-2">
-                        <img src="{{ Storage::url('public/blog/' . $article->url_image) }}" alt="Image actuelle"
-                            width="100">
+                        <img src="{{ Storage::url('public/blog/' . $article->url_image) }}" alt="Image actuelle" width="100" class="img-thumbnail">
                     </div>
                 @endif
             </div>
-            <div class="mb-3">
+
+            <div class="form-group">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="5" required>{{ $article->description }}</textarea>
                 <div class="invalid-feedback">Veuillez entrer une description de l'article.</div>
             </div>
+
+            <div class="form-group">
+                <label>À la Une</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_oui" value="1" {{ $article->a_la_une == 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="la_une_oui">Oui</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_non" value="0" {{ $article->a_la_une == 0 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="la_une_non">Non</label>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Modifier</button>
                 <a href="{{ route('accueil') }}" class="btn btn-secondary">Annuler</a>

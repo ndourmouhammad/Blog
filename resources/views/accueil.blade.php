@@ -16,6 +16,18 @@
             object-position: center;
         }
 
+        .badge-featured {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: gold;
+            color: black;
+            padding: 5px 10px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
         .btn-primary {
             color: white;
             background: blue;
@@ -100,9 +112,12 @@
             @endif
             @foreach ($mes_articles as $article)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 position-relative">
                         <img class="card-img-top" src="{{ Storage::url('public/blog/' . $article->url_image) }}"
                             alt="Image de l'article">
+                        @if ($article->a_la_une)
+                            <div class="badge-featured">À la Une</div>
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->nom }}</h5>
                             <p class="card-text">{{ Str::limit($article->description, 200) }}</p>

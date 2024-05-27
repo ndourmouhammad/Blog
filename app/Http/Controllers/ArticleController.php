@@ -40,6 +40,7 @@ class ArticleController extends Controller
             'nom' => 'required',
             'image' => 'required|max:2048',
             'description' => 'required',
+            'a_la_une' => 'required|boolean'
         ]);
 
 
@@ -60,6 +61,7 @@ class ArticleController extends Controller
         $article->nom = $request->nom;
         $article->url_image = $image; // Nom du fichier de l'image
         $article->description = $request->description;
+        $article->a_la_une = $request->a_la_une;
         $article->save();
 
         // Rediriger avec un message de succès
@@ -84,6 +86,7 @@ class ArticleController extends Controller
             'nom' => 'required',
             'image' => 'required|max:2048',
             'description' => 'required',
+            'a_la_une' => 'required'
         ]);
 
         // Stocker l'image dans le répertoire storage/app/public/blog
@@ -97,11 +100,12 @@ class ArticleController extends Controller
         // Récupérer le nom du fichier de l'image à partir du chemin stocké
         $image = basename($chemin_image);
 
-        // Créer un nouvel article
+        // Modidier l'article
         $article = Article::findOrFail($request->id);
         $article->nom = $request->nom;
         $article->url_image = $image; // Nom du fichier de l'image
         $article->description = $request->description;
+        $article->a_la_une = $request->a_la_une;
         $article->update();
 
         return redirect()->route('articles.details', ['id' => $article->id])->with('success', 'Article modifié avec succès.');
