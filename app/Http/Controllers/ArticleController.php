@@ -12,7 +12,7 @@ class ArticleController extends Controller
 
     public function accueil()
     {
-        $mes_articles = Article::paginate(3);
+        $mes_articles = Article::paginate(6);
         return view('accueil', ['mes_articles' => $mes_articles]);
     }
 
@@ -40,7 +40,7 @@ class ArticleController extends Controller
             'nom' => 'required',
             'image' => 'required|max:2048',
             'description' => 'required',
-            'a_la_une' => 'required|boolean'
+            'a_la_une' => 'required|boolean',
         ]);
 
 
@@ -86,7 +86,7 @@ class ArticleController extends Controller
             'nom' => 'required',
             'image' => 'required|max:2048',
             'description' => 'required',
-            'a_la_une' => 'required'
+            'a_la_une' => 'required',
         ]);
 
         // Stocker l'image dans le répertoire storage/app/public/blog

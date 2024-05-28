@@ -24,7 +24,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         // Générer une image temporaire et la stocker localement
-        $imageUrl = $this->faker->imageUrl(640, 480, 'technics', true, 'Faker');
+        $imageUrl = $this->faker->imageUrl(640, 480, 'food', true, 'Faker');
         $imageContents = file_get_contents($imageUrl);
         $imageNom = Str::random(10) . '.jpg';
         $imagePath = 'public/blog/' . $imageNom;

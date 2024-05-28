@@ -50,38 +50,49 @@
 <body>
     <div class="container">
         <h1 class="mb-4">Nouvel Article</h1>
+       
         <form action="{{ route('article.enregistre') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
                 <label for="nom" class="form-label">Nom de l'article</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-                <div class="invalid-feedback">Veuillez entrer le nom de l'article.</div>
+                <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom') }}">
+                @error('nom')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" id="image" name="image" required>
-                <div class="invalid-feedback">Veuillez sélectionner une image.</div>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
-                <div class="invalid-feedback">Veuillez entrer une description de l'article.</div>
+                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+                @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label>À la Une</label><br>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_oui" value="1">
+                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_oui" value="1" required>
                     <label class="form-check-label" for="la_une_oui">Oui</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_non" value="0" checked>
+                    <input class="form-check-input" type="radio" name="a_la_une" id="la_une_non" value="0" checked required>
                     <label class="form-check-label" for="la_une_non">Non</label>
                 </div>
+                @error('a_la_une')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+
 
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Ajouter</button>

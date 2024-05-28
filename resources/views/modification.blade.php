@@ -59,13 +59,20 @@
 <body>
     <div class="container">
         <h1 class="mb-4">Mise à jour de l'article</h1>
+        @if ($errors->any())
+        <ul >
+            @foreach ($errors->all() as $error)
+            <li class="alert alert-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
+        @endif
         <form action="/modifier/traitement" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $article->id }}">
             
             <div class="form-group">
                 <label for="nom" class="form-label">Nom de l'article</label>
-                <input type="text" class="form-control" id="nom" name="nom" value="{{ $article->nom }}" required>
+                <input type="text" class="form-control" id="nom" name="nom" value="{{ $article->nom }}" >
                 <div class="invalid-feedback">Veuillez entrer le nom de l'article.</div>
             </div>
 
@@ -83,7 +90,7 @@
 
             <div class="form-group">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="5" required>{{ $article->description }}</textarea>
+                <textarea class="form-control" id="description" name="description" rows="5" >{{ $article->description }}</textarea>
                 <div class="invalid-feedback">Veuillez entrer une description de l'article.</div>
             </div>
 
